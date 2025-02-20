@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Crear Libro</title>
+</head>
+<body>
+<h1>Crear un nuevo libro</h1>
+
+<!-- Enlace para crear un nuevo autor si no está en la lista -->
+<p>
+    ¿No ves el autor que buscas?
+    <a th:href="@{/autores/nuevo}">Crear nuevo autor</a>
+</p>
+
+<!--
+   En este formulario se asume que tu controlador escuchará un POST
+   en la ruta "/libros". Ajusta la ruta según tu necesidad.
+-->
+<form th:action="@{/libros/nuevo}" method="post">
+    <div>
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required />
+    </div>
+
+    <div>
+        <label for="genero">Género:</label>
+        <input type="text" id="genero" name="genero" required />
+    </div>
+
+    <div>
+        <label for="paginas">Páginas:</label>
+        <input type="number" id="paginas" name="paginas" min="1" required />
+    </div>
+
+    <!-- Selector de Autor -->
+    <div>
+        <label for="idAutor">Autor:</label>
+        <!--
+            Se itera sobre una lista de autores (model.addAttribute("autores", listaAutores))
+            Ajusta el nombre de la propiedad: "id_autor" o "id" etc.
+        -->
+        <select id="idAutor" name="idAutor" required>
+            <option value="">Seleccione un autor</option> <!-- Opción por defecto -->
+            <option th:each="autor : ${autores}"
+                    th:value="${autor.idAutor}"
+                    th:text="${autor.nombre + ' ' + autor.apellidos}">
+            </option>
+        </select>
+
+    </div>
+
+    <div>
+        <button type="submit">Crear Libro</button>
+    </div>
+</form>
+</body>
+</html>

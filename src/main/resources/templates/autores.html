@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h1>Información del autor</h1>
+            <div class="libros-container" th:each="autor : ${autores}">
+                <div>
+                    <h2 th:text="${autor.nombre}"></h2>
+                    <p th:text="${autor.apellidos}"></p>
+                    <p th:text="${autor.edad}"></p>
+                    <p th:text="${autor.nacionalidad}"></p>
+
+                </div>
+
+            </div>
+            <a href="/libros"><p>Ir a libros</p></a>
+        </div>
+    </div>
+
+</body>
+</html>
